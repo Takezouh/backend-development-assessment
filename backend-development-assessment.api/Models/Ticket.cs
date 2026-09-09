@@ -12,6 +12,6 @@ public class Ticket
     public string priority { get; set; } = string.Empty;
     public string status { get; set; } = string.Empty;
 
-    public DateTime resolved_at { get; set; }
+    public DateTime? resolved_at { get; set; }
     public DateTime updated_at { get; set; } = DateTime.UtcNow;
 }

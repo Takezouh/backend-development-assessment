@@ -136,7 +136,14 @@ public class TicketController : ControllerBase
         if (request.Priority is not null)
             ticket.priority = request.Priority;
         if (request.Status is not null)
-            ticket.status = request.Status;
+        {
+            if (request.Status == "open" || request.Status == "in_progress")
+            {
+                ticket.status = request.Status;
+                ticket.updated_at = DateTime.UtcNow;
+                ticket.resolved_at = null;
+            }
+        }
 
         await _context.SaveChangesAsync();
         return NoContent();
