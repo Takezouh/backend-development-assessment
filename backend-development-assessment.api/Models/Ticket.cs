@@ -9,7 +9,7 @@ public class Ticket
     public string department { get; set; } = string.Empty;
     public string subject { get; set; } = string.Empty;
     public string description { get; set; } = string.Empty;
-    public string priority { get; set; } = string.Empty;
+    public string priority { get; set; } = "low";
     public string status { get; set; } = string.Empty;
 
     public DateTime? resolved_at { get; set; }
