@@ -1,9 +1,9 @@
 
 
+using backend_development_assessment.api.Common;
 using backend_development_assessment.api.Data;
 using backend_development_assessment.api.DTOs;
 using backend_development_assessment.api.Models;
-using backend_development_assessment.api.Validators;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -41,8 +41,7 @@ public class TicketController : ControllerBase
                 t.description,
                 t.priority,
                 t.status,
-                t.resolved_at,
-                t.updated_at
+                t.resolved_at
             )
             ).ToListAsync();
 
@@ -63,8 +62,7 @@ public class TicketController : ControllerBase
                 t.description,
                 t.priority,
                 t.status,
-                t.resolved_at,
-                t.updated_at
+                t.resolved_at
             )
             ).FirstOrDefaultAsync();
 
@@ -133,17 +131,21 @@ public class TicketController : ControllerBase
             ticket.subject = request.Subject;
         if (request.Description is not null)
             ticket.description = request.Description;
+            
         if (request.Priority is not null)
-            ticket.priority = request.Priority;
+            ticket.priority = request.Priority.Value;
         if (request.Status is not null)
         {
-            if (request.Status == "open" || request.Status == "in_progress")
+            ticket.status = request.Status.Value;
+            ticket.updated_at = DateTime.UtcNow;
+
+            if (request.Status == Status.Open || request.Status == Status.InProgress)
             {
-                ticket.status = request.Status;
-                ticket.updated_at = DateTime.UtcNow;
                 ticket.resolved_at = null;
             }
         }
+
+
 
         await _context.SaveChangesAsync();
         return NoContent();

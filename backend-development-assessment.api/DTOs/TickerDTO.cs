@@ -1,5 +1,7 @@
 
 
+using backend_development_assessment.api.Common;
+
 namespace backend_development_assessment.api.DTOs;
 
 public record CreateTicketDTO(
@@ -8,11 +10,10 @@ public record CreateTicketDTO(
     string Department,
     string Subject,
     string Description,
-    string Priority,
-    string Status,
-    DateTime? ResolvedAt,
-    DateTime CreatedAt
+    Priority Priority,
+    Status Status
 );
+
 public record TicketDetailsDTO(
     int Id,
     string Name,
@@ -20,10 +21,9 @@ public record TicketDetailsDTO(
     string Department,
     string Subject,
     string Description,
-    string Priority,
-    string Status,
-    DateTime? ResolvedAt,
-    DateTime UpdatedAt
+    Priority? Priority,
+    Status? Status,
+    DateTime? ResolvedAt
 );
 
 public record UpdateTicketDTO(
@@ -33,9 +33,8 @@ public record UpdateTicketDTO(
     string Department,
     string Subject,
     string Description,
-    string Priority,
-    string Status,
-    DateTime? ResolvedAt,
-    DateTime UpdatedAt
+    Priority? Priority,
+    Status? Status,
+    DateTime? ResolvedAt
 );
 

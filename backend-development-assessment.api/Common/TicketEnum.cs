@@ -7,3 +7,10 @@ public enum Priority
     Medium,
     High
 }
+
+public enum Status
+{
+    Open,
+    InProgress,
+    Resolved
+}
